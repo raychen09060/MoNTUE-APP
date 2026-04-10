@@ -7,7 +7,7 @@ export default function Intro() {
   return (
     <SafeAreaView style={styles.intro_container}>
       <Pressable style={styles.intro_logo_container} onPress={() => router.push('/Home')}>
-        <Image source={require('../images/logo_BM.png')} style={styles.intro_logo} resizeMode="contain"/>
+        <Image source={require('../images/logo_LM.png')} style={styles.intro_logo} resizeMode="contain"/>
       </Pressable>
     </SafeAreaView>
   );

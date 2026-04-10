@@ -7,27 +7,27 @@ export default function Footer( {Section} ) {
         {
             id: "Home",
             active_icon: require('../images/Home_actived_icon.png'),
-            deactive_icon: require('../images/Home_deactived_icon_BM.png'),
+            deactive_icon: require('../images/Home_deactived_icon_LM.png'),
         },
         {
             id: "Calendar",
             active_icon: require('../images/Calendar_actived_icon.png'),
-            deactive_icon: require('../images/Calendar_deactived_icon_BM.png'),
+            deactive_icon: require('../images/Calendar_deactived_icon_LM.png'),
         },
         {
             id: "Guide",
             active_icon: require('../images/Guide_actived_icon.png'),
-            deactive_icon: require('../images/Guide_deactived_icon_BM.png'),
+            deactive_icon: require('../images/Guide_deactived_icon_LM.png'),
         },
         {
             id: "Tickets",
             active_icon: require('../images/Tickets_actived_icon.png'),
-            deactive_icon: require('../images/Tickets_deactived_icon_BM.png'),
+            deactive_icon: require('../images/Tickets_deactived_icon_LM.png'),
         },
         {
             id: "Settings",
             active_icon: require('../images/Settings_actived_icon.png'),
-            deactive_icon: require('../images/Settings_deactived_icon_BM.png'),
+            deactive_icon: require('../images/Settings_deactived_icon_LM.png'),
         }
     ];
 

@@ -7,9 +7,7 @@ export default function Header({ Section }) {
             <Text style={styles.header_text}>
                 {Section}
             </Text>
-            <View style={styles.header_divider}>
-
-            </View>
+            <Image source={require('../images/Language_switch_icon_LM.png')} style={{ width: 20, height: 20, position: 'absolute', right: 20 }} resizeMode="contain"/>
         </View>
     );
 }
@@ -28,10 +26,4 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
     },
-    header_divider: {
-        width: 100,
-        height: 2,
-        marginTop: 3,
-        backgroundColor: '#000000',
-    }
 });
