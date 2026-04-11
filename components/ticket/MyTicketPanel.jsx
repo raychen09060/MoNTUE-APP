@@ -4,7 +4,7 @@ import React from 'react';
 export default function MyTicketPanel() {
   return (
     <View style={[styles.box, { backgroundColor: '#D6E4FF' }]}>
-      <Text style={styles.note}>test</Text>
+      <Text style={styles.note}>票 券 夾</Text>
     </View>
   );
 }
@@ -12,11 +12,11 @@ export default function MyTicketPanel() {
 const styles = StyleSheet.create({
   box: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingLeft: 28,
+    paddingTop: 20,
   },
     note: {
-      fontSize: 50,
+      fontSize: 15,
       color: '#111111',
     }
 });
