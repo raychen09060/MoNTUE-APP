@@ -1,4 +1,5 @@
 import { Text, View, Image, StyleSheet, Pressable } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react';
 import { router } from 'expo-router';
 
@@ -32,6 +33,7 @@ export default function Footer( {Section} ) {
     ];
 
     return (
+        <SafeAreaView style={styles.container}>
         <View style={styles.footer_container}>
             <Pressable style={styles.footer_button} onPress={() => router.push('/Home')}>
                 {Section === sections_icons[0].id ? (
@@ -69,20 +71,21 @@ export default function Footer( {Section} ) {
                 )}
             </Pressable>
         </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     footer_container: {
-        display: 'flex',
         width: "100%",
-        height: 70,
+        marginBottom: 0,
+        minHeight: 70,
         paddingHorizontal: 20,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
-/*         borderWidth: 1,
-        borderColor: '#ff0000', */
+        // borderWidth: 1,
+        // borderColor: '#ff0000', 
     },
     footer_button: {
         display: 'flex',
@@ -90,8 +93,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 50,
         height: 50,
-/*         borderWidth: 1,
-        borderColor: '#ff0000', */
+        // borderWidth: 1,
+        // borderColor: '#ff0000', 
     },
     footer_icon: {
         width: 25,
