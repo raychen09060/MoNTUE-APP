@@ -11,7 +11,7 @@ export default function Calendar() {
                 <View style={styles.calendar_container}>
                     <View style={styles.upcomming_container}>
                         <Text style={{ fontSize: 15, fontWeight: 'semibold' }}>預告展覽</Text>
-                        
+                        <Image source={require('../images/EP_remote-viewing_H.png')} style={styles.upcomming_img_container} resizeMode="cover"/>
                     </View>
                 </View>
             <Footer Section="Calendar"/>
@@ -26,5 +26,16 @@ const styles = StyleSheet.create({
     },
     calendar_container: {
         flex: 1,
+        alignItems: 'center',
+    },
+    upcomming_container: {
+        width: 300,
+        height: 200,
+    },
+    upcomming_img_container: {
+        width: '100%',
+        height: 150,
+        borderRadius: 5,
+        marginTop: 10,
     },
 });

@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     ticket_container: {
-        flex: 1,
-
+      flex: 1,
     },
 });

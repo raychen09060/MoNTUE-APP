@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import React from 'react';
 import BuyTicket from './BuyTicket';
 export default function ExhibitionPanel() {
@@ -26,28 +26,30 @@ export default function ExhibitionPanel() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 28,
-    paddingTop: 15,
+    alignSelf: 'center',
+    width: 300,
+    paddingTop: 10,
     backgroundColor: '#ffffff',
   },
   poster: {
     width: '100%',
-    height: 190,
-    marginBottom: 15,
+    height: 150,
+    borderRadius: 5,
   },
   title: {
-    fontSize: 24,
+    fontSize: 18,
     color: '#111111',
     textAlign: 'center',
     letterSpacing: 2,
     fontWeight: '600',
-    marginBottom: 10,
+    marginTop: 5,
+    marginBottom: 5,
   },
   note: {
-    fontSize: 12,
+    fontSize: 10,
     color: '#666666',
     textAlign: 'center',
-    marginBottom: 10,
+    marginBottom: 5,
   },
   divider: {
     height: 1,

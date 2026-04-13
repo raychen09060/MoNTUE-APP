@@ -75,12 +75,15 @@ export default function Footer( {Section} ) {
 
 const styles = StyleSheet.create({
     footer_container: {
+        position: 'absolute',
+        bottom: 15,
         width: "100%",
-        minHeight: 70,
+        minHeight: 60,
         paddingHorizontal: 20,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-around',
+        backgroundColor: '#ffffff',
 /*         borderWidth: 1,
         borderColor: '#ff0000',  */
     },

@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: 5,
+    marginVertical: 2.5,
     backgroundColor: '#ffffff',
     paddingLeft: 5,
   },
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
 
   price: {
-    fontSize: 13,
+    fontSize: 12,
     color: '#666666',
   },
 
@@ -157,13 +157,13 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: '#BDBDBD',
-    marginVertical: 5,
+    marginVertical: 2.5,
   },
 
   totalRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 16,
+    marginBottom: 5,
   },
 
   totalText: {
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#F8E364',
     borderRadius: 24,
-    paddingVertical: 12,
+    paddingVertical: 1,
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-end',
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '700',
     color: '#ffffff',
     letterSpacing: 2,

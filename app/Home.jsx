@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image, ScrollView, Pressable, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Image, Pressable, FlatList } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Footer from '../components/Footer';
@@ -61,9 +61,9 @@ const styles = StyleSheet.create({
         flex: 1,
         width: 300,
         alignSelf: 'center',
-        marginTop: 20,
-        borderWidth: 1,
-        borderColor: 'rgba(0, 0, 0, 0)',
+        marginTop: 15,
+/*         borderWidth: 1,
+        borderColor: 'rgba(0, 0, 0, 0)', */
     },
     news_item_container: {
         width: '100%',

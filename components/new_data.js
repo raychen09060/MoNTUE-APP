@@ -17,4 +17,52 @@ export const NEWS = [
     date: "2026.02.24",
     description: "接下來我們暫時休館，敬請騎大美術館下一檔展覽。",
 },
+{
+    id: "4",
+    title: "【TaiwanPlus展覽專訪分享】",
+    date: "2026.02.24",
+    description: "接下來我們暫時休館，敬請騎大美術館下一檔展覽。",
+},
+{
+    id: "5",
+    title: "【TaiwanPlus展覽專訪分享】",
+    date: "2026.02.24",
+    description: "接下來我們暫時休館，敬請騎大美術館下一檔展覽。",
+},
+{
+    id: "6",
+    title: "【TaiwanPlus展覽專訪分享】",
+    date: "2026.02.24",
+    description: "接下來我們暫時休館，敬請騎大美術館下一檔展覽。",
+},
+{
+    id: "7",
+    title: "【TaiwanPlus展覽專訪分享】",
+    date: "2026.02.24",
+    description: "接下來我們暫時休館，敬請騎大美術館下一檔展覽。",
+},
+{
+    id: "8",
+    title: "【TaiwanPlus展覽專訪分享】",
+    date: "2026.02.24",
+    description: "接下來我們暫時休館，敬請騎大美術館下一檔展覽。",
+},
+{
+    id: "9",
+    title: "【TaiwanPlus展覽專訪分享】",
+    date: "2026.02.24",
+    description: "接下來我們暫時休館，敬請騎大美術館下一檔展覽。",
+},
+{
+    id: "10",
+    title: "【TaiwanPlus展覽專訪分享】",
+    date: "2026.02.24",
+    description: "接下來我們暫時休館，敬請騎大美術館下一檔展覽。",
+},
+{
+    id: "11",
+    title: "【TaiwanPlus展覽專訪分享】",
+    date: "2026.02.24",
+    description: "接下來我們暫時休館，敬請騎大美術館下一檔展覽。",
+},
 ];

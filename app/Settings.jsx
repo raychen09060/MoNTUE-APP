@@ -29,19 +29,19 @@ export default function Settings() {
                             <View style={styles.settings_selestions_container}>
                                 <Pressable style={styles.settings_selections_button}>
                                     <Image source={require('../images/Transport_icon_LM.png')} style={styles.settings_selections_button_icon} resizeMode="contain"/>
-                                    <Text style={{ fontSize: 20, marginLeft: 20 }}>交 通 資 訊</Text>
+                                    <Text style={{ fontSize: 20, marginLeft: 15 }}>交 通 資 訊</Text>
                                     <Image source={require('../images/Next_icon_LM.png')} style={{ width: 15, height: 15, position: 'absolute', right: 20 }} resizeMode="contain"/>
                                 </Pressable>
                                 <View style={{ width: '100%', height: 1, backgroundColor: '#000000' }}></View>
                                 <Pressable style={styles.settings_selections_button}>
                                     <Image source={require('../images/Contact_icon_LM.png')} style={styles.settings_selections_button_icon} resizeMode="contain"/>
-                                    <Text style={{ fontSize: 20, marginLeft: 20 }}>服 務 中 心</Text>
+                                    <Text style={{ fontSize: 20, marginLeft: 15 }}>服 務 中 心</Text>
                                     <Image source={require('../images/Next_icon_LM.png')} style={{ width: 15, height: 15, position: 'absolute', right: 20 }} resizeMode="contain"/>
                                 </Pressable>
                                 <View style={{ width: '100%', height: 1, backgroundColor: '#000000' }}></View>
                                 <View style={styles.settings_selections_button}>
                                     <Image source={require('../images/Display_mode_icon_LM.png')} style={styles.settings_selections_button_icon} resizeMode="contain"/>
-                                    <Text style={{ fontSize: 20, marginLeft: 20 }}>深 色 模 式</Text>
+                                    <Text style={{ fontSize: 20, marginLeft: 15 }}>深 色 模 式</Text>
                                     <Pressable style={{
                                         display: 'flex',
                                         justifyContent: 'center',
@@ -73,13 +73,13 @@ export default function Settings() {
                                 <View style={{ width: '100%', height: 1, backgroundColor: '#000000' }}></View>
                                 <Pressable style={styles.settings_selections_button}>
                                     <Image source={require('../images/Notification_icon_LM.png')} style={styles.settings_selections_button_icon} resizeMode="contain"/>
-                                    <Text style={{ fontSize: 20, marginLeft: 20 }}>通 知 設 定</Text>
+                                    <Text style={{ fontSize: 20, marginLeft: 15 }}>通 知 設 定</Text>
                                     <Image source={require('../images/Next_icon_LM.png')} style={{ width: 15, height: 15, position: 'absolute', right: 20 }} resizeMode="contain"/>
                                 </Pressable>
                                 <View style={{ width: '100%', height: 1, backgroundColor: '#000000' }}></View>
                                 <Pressable style={styles.settings_selections_button}>
                                     <Image source={require('../images/Info_icon_LM.png')} style={styles.settings_selections_button_icon} resizeMode="contain"/>
-                                    <Text style={{ fontSize: 20, marginLeft: 20 }}>關 於</Text>
+                                    <Text style={{ fontSize: 20, marginLeft: 15 }}>關 於</Text>
                                     <Image source={require('../images/Next_icon_LM.png')} style={{ width: 15, height: 15, position: 'absolute', right: 20 }} resizeMode="contain"/>
                                 </Pressable>
                             </View>
@@ -161,8 +161,8 @@ const styles = StyleSheet.create({
         borderColor: '#ff0000', */
     },
     settings_selections_button_icon: {
-        width: 30,
-        height: 30,
-        marginLeft: 20,
+        width: 20,
+        height: 20,
+        marginLeft: 15,
     },
 });

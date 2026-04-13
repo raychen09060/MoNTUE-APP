@@ -107,7 +107,7 @@ export default function Carousel() {
 
                 renderItem={({ item }) => (
                     <View style={styles.slide}>
-                        <Image source={item.image} style={{ width: width, height: '65%' }} resizeMode="cover"/>
+                        <Image source={item.image} style={{ width: width, height: '100%' }} resizeMode="cover"/>
                     </View>
                 )}
             />
@@ -117,14 +117,19 @@ export default function Carousel() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        display: 'flex',
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#ff0000',
     },
     slide: {
         width: width,
-        height: 300,
+        height: 195,
         justifyContent: 'flex-start',
         alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#00ff00',
     },
 });
