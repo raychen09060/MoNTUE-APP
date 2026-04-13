@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image } from 'react-native';
 import React from 'react';
-
+import BuyTicket from './BuyTicket';
 export default function ExhibitionPanel() {
   return (
     <View style={styles.container}>
@@ -17,6 +17,7 @@ export default function ExhibitionPanel() {
       </Text>
 
       <View style={styles.divider} />
+      <BuyTicket />
     </View>
   );
 }
@@ -26,13 +27,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 28,
-    paddingTop: 20,
-    backgroundColor: '#F3F3F3',
+    paddingTop: 15,
+    backgroundColor: '#ffffff',
   },
   poster: {
     width: '100%',
     height: 190,
-    marginBottom: 18,
+    marginBottom: 15,
   },
   title: {
     fontSize: 24,
@@ -40,13 +41,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     letterSpacing: 2,
     fontWeight: '600',
-    marginBottom: 24,
+    marginBottom: 10,
   },
   note: {
     fontSize: 12,
     color: '#666666',
     textAlign: 'center',
-    marginBottom: 16,
+    marginBottom: 10,
   },
   divider: {
     height: 1,

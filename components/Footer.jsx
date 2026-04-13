@@ -1,5 +1,5 @@
 import { Text, View, Image, StyleSheet, Pressable } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+// import { SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react';
 import { router } from 'expo-router';
 
