@@ -9,22 +9,22 @@ export const now_or_upcomming_data = [
 export const past_data = [
     {
         id: "p1",
-        img: require('../../images/EP_remote-viewing_H.png'),
+        img: require('../../images/EP_the-limit-is-the-turbulent-skies.jpg'),
         description: "",
     },
     {
         id: "p2",
-        img: require('../../images/Museum-indoor_H.jpg'),
+        img: require('../../images/EP_in-vivo_D.jpg'),
         description: "",
     },
     {
         id: "p3",
-        img: require('../../images/Museum-window_H.jpg'),
+        img: require('../../images/EP_unseen-life_D.jpg'),
         description: "",
     },
     {
         id: "p4",
-        img: require('../../images/EP_remote-viewing_H.png'),
+        img: require('../../images/EP_kusama_yayoi_D.png'),
         description: "",
     },
 ];
