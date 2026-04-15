@@ -14,6 +14,7 @@ export default function Calendar() {
                         <Image source={require('../images/EP_remote-viewing_H.png')} style={styles.upcomming_img_container} resizeMode="cover"/>
                     </View>
                 </View>
+
             <Footer Section="Calendar"/>
         </SafeAreaView>
     );
@@ -25,6 +26,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     calendar_container: {
+        flex: 1,
+        alignItems: 'center',
+    },
+        calendar_past: {
         flex: 1,
         alignItems: 'center',
     },

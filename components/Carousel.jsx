@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
-        borderColor: '#ff0000',
+        // borderColor: '#ff0000',
     },
     slide: {
         width: width,
@@ -130,6 +130,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         borderWidth: 1,
-        borderColor: '#00ff00',
+        borderColor: '#ffffff',
     },
 });
