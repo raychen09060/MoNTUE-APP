@@ -22,10 +22,7 @@ export default function News() {
         <SafeAreaView style={styles.container}>
             <View style={styles.home_header_container}>
                 <Image source={require('../images/logo_LM.png')} style={{ width: 200, height: 100 }} resizeMode="contain"/>
-                <Pressable 
-                    style={styles.home_header_button_container}
-                    onPress={() => router.push('/testpage')}
-                    >
+                <Pressable style={styles.home_header_button_container}>
                     <Image source={require('../images/Language_switch_icon_LM.png')} style={{ width: 20, height: 20 }} resizeMode="contain"/>
                 </Pressable>
             </View>

@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { past_exhibition_data } from '../components/calendar/past_data';
+import { past_data } from '../components/calendar/poster_data';
 
 export default function Calendar() {
     const scrollY = useRef(new Animated.Value(0)).current;
@@ -21,7 +21,7 @@ export default function Calendar() {
             <View style={styles.calendar_container}>
                 
                 <Animated.FlatList
-                    data={past_exhibition_data}
+                    data={past_data}
                     keyExtractor={(item) => item.id.toString()}
                     style={{ marginTop: 20 }}
                     onScroll={Animated.event(
