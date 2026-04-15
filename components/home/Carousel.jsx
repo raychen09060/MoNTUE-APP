@@ -6,27 +6,27 @@ const { width } = Dimensions.get('window');
 const carousel_data = [
     {
         id: 1,
-        image: require('../images/Closed_announcement.png'),
+        image: require('../../images/Closed_announcement.png'),
     },
     {
         id: 2,
-        image: require('../images/EP_remote-viewing_H.png'),
+        image: require('../../images/EP_remote-viewing_H.png'),
     },
     {
         id: 3,
-        image: require('../images/Museum-indoor_H.jpg'),
+        image: require('../../images/Museum-indoor_H.jpg'),
     },
     {
         id: 4,
-        image: require('../images/Museum-window_H.jpg'),
+        image: require('../../images/Museum-window_H.jpg'),
     },
     {
         id: 5,
-        image: require('../images/Closed_announcement.png'),
+        image: require('../../images/Closed_announcement.png'),
     },
     {
         id: 6,
-        image: require('../images/EP_remote-viewing_H.png'),
+        image: require('../../images/EP_remote-viewing_H.png'),
     },
 ];
 
@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
-        // borderColor: '#ff0000',
+/*         borderWidth: 1,
+        borderColor: '#ff0000', */
     },
     slide: {
         width: width,

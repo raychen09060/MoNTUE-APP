@@ -1,11 +1,23 @@
-import { StyleSheet, View, Text, Image, Pressable, FlatList } from 'react-native';
-import React from 'react';
+import { StyleSheet, View, Text, Image, Pressable, Animated } from 'react-native';
+import React, { useRef } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Footer from '../components/Footer';
-import Carousel from '../components/Carousel';
-import { NEWS } from '../components/new_data';
+import Carousel from '../components/home/Carousel';
+import { NEWS } from '../components/home/news_data';
+import { router } from 'expo-router';
 
 export default function News() {
+    // 1. Create the scrollY animated value
+    const scrollY = useRef(new Animated.Value(0)).current;
+
+    // 2. Interpolate the scroll value to shrink the Carousel height
+    // As you scroll down 200px, the carousel shrinks from 300px to 100px
+    const carouselHeight = scrollY.interpolate({
+        inputRange: [0, 195],
+        outputRange: [195, 0], 
+        extrapolate: 'clamp', 
+    });
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.home_header_container}>
@@ -14,22 +26,43 @@ export default function News() {
                     <Image source={require('../images/Language_switch_icon_LM.png')} style={{ width: 20, height: 20 }} resizeMode="contain"/>
                 </Pressable>
             </View>
-            <Carousel />
-            <View style={styles.news_container}>
-                <Text style={{ fontSize: 15 }}>最 新 消 息</Text>
-                <FlatList
+
+            <View style={styles.main_content}>
+                
+                <Animated.FlatList
                     data={NEWS}
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={(item) => item.id.toString()}
+                    style={{width: 300, alignSelf: 'center'}}
+                    onScroll={Animated.event(
+                        [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                        { useNativeDriver: false }
+                    )}
+                    showsVerticalScrollIndicator={false}
+                    
+                    contentContainerStyle={{ 
+                        paddingTop: 230,
+                        paddingBottom: 50,
+                        alignItems: 'center'
+                    }} 
+
                     renderItem={({ item }) => (
                         <View style={styles.news_item_container}>
-                            <Text style={{ fontSize: 12, fontWeight: 'bold', letterSpacing: 6, lineHeight: 20 }}>{item.title}</Text>
+                            <Text style={{ fontSize: 12, fontWeight: '600', letterSpacing: 3, lineHeight: 20 }}>{item.title}</Text>
                             <Text style={{ fontSize: 10, color: '#666666', letterSpacing: 2, lineHeight: 15 }}>{item.date}</Text>
                             <Text style={{ fontSize: 10, letterSpacing: 2, lineHeight: 18 }}>{item.description}</Text>
                         </View>
                     )}
-                    showsVerticalScrollIndicator={false}
                 />
+                <View style={styles.carousel_wrapper}>
+                    <Animated.View style={{ height: carouselHeight, overflow: 'hidden' }}>
+                        <Carousel />
+                    </Animated.View>
+                    <View style={{width: 300, alignSelf: 'center' }}>
+                        <Text style={{fontSize: 15, fontWeight: '600', marginVertical: 10 }}>最新公告</Text>
+                    </View>
+                </View>
             </View>            
+            
             <Footer Section="Home"/>
         </SafeAreaView>
     );
@@ -39,8 +72,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ffffff',
-/*         borderWidth: 1,
-        borderColor: '#00ff00', */
     },
     home_header_container: {
         display: 'flex',
@@ -48,6 +79,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
+        backgroundColor: '#ffffff', // Ensures scrolling items don't show behind the header
+        zIndex: 2,
     },
     home_header_button_container: {
         display: 'flex',
@@ -57,20 +90,26 @@ const styles = StyleSheet.create({
         height: 50,
         marginRight: 10,
     },
-    news_container: {
+    main_content: {
         flex: 1,
-        width: 300,
-        alignSelf: 'center',
-        marginTop: 15,
-/*         borderWidth: 1,
-        borderColor: 'rgba(0, 0, 0, 0)', */
+        position: 'relative',
+        paddingBottom: 50,
+    },
+    carousel_wrapper: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        width: '100%',
+        backgroundColor: '#ffffff', // Prevents list items from bleeding through transparent edges
+        zIndex: 1, 
     },
     news_item_container: {
-        width: '100%',
-        height: 60,
+        width: 300,
         borderRadius: 5,
         backgroundColor: '#d0d0d0',
-        marginTop: 10,
+        marginTop: 20,
         paddingLeft: 10,
+        justifyContent: 'center',
     },
 });

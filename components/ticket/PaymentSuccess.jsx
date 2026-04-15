@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import React from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../Header';
+import Footer from '../Footer';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function PaymentSuccess() {

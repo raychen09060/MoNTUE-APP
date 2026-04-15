@@ -1,23 +1,49 @@
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, Image, ScrollView, Animated } from 'react-native';
+import React, { useRef }from 'react';
 import BuyTicket from './BuyTicket';
 export default function ExhibitionPanel() {
+  const scrollY = useRef(new Animated.Value(0)).current;
+
+  const imageHeight = scrollY.interpolate({
+        inputRange: [0, 90],
+        outputRange: [190, 100], 
+        extrapolate: 'clamp',
+    });
+
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../images/EP_remote-viewing_H.png')}
-        style={styles.poster}
-        resizeMode="cover"
-      />
 
-      <Text style={styles.title}>《遙視》(Remote Viewing)</Text>
+      <Animated.ScrollView
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: false }
+        )}
+        scrollEventThrottle={16}
+                
+        contentContainerStyle={{
+            paddingTop: 210,
+            paddingBottom: 50,
+        }}
+      >
+        <Text style={styles.title}>《遙視》(Remote Viewing)</Text>
 
-      <Text style={styles.note}>
-        未滿六歲兒童、持本國身心障礙手冊者免費入場
-      </Text>
+        <Text style={styles.note}>
+          未滿六歲兒童、持本國身心障礙手冊者免費入場
+        </Text>
 
-      <View style={styles.divider} />
-      <BuyTicket />
+        <View style={styles.divider} />
+        <BuyTicket />
+      </Animated.ScrollView>
+
+      <Animated.View style={[styles.absolute_header, { height: imageHeight }]}>
+        <Image
+          source={require('../../images/EP_remote-viewing_H.png')}
+          style={styles.poster}
+          resizeMode="cover"
+        />
+      </Animated.View>
     </View>
   );
 }
@@ -28,12 +54,22 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     width: 300,
-    paddingTop: 10,
     backgroundColor: '#ffffff',
+    position: 'relative',
+  },
+  absolute_header: {
+    position: 'absolute',
+    top: 10,
+    left: 0,
+    right: 0,
+    width: '100%',
+    overflow: 'hidden',
+    backgroundColor: '#ffffff',
+    zIndex: 1,
   },
   poster: {
     width: '100%',
-    height: 150,
+    height: 190,
     borderRadius: 5,
   },
   title: {
@@ -42,8 +78,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     letterSpacing: 2,
     fontWeight: '600',
-    marginTop: 5,
-    marginBottom: 5,
+    marginVertical: 10,
   },
   note: {
     fontSize: 10,

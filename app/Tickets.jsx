@@ -9,23 +9,23 @@ import MyTicketPanel from '../components/ticket/MyTicketPanel';
 import VisitTicketPanel from '../components/ticket/VisitTicketPanel';
 
 export default function Tickets() {
-  const [activeTab, setActiveTab] = useState('exhibition');
+    const [activeTab, setActiveTab] = useState('exhibition');
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Header Section="門票資訊" />
+    return (
+        <SafeAreaView style={styles.container}>
+            <Header Section="門票資訊" />
 
-      <TicketTab activeTab={activeTab} setActiveTab={setActiveTab} />
+            <TicketTab activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <View style={styles.ticket_container}>
-        {activeTab === 'exhibition' && <ExhibitionPanel />}
-        {activeTab === 'my' && <MyTicketPanel />}
-        {activeTab === 'visit' && <VisitTicketPanel />}
-      </View>
+            <View style={styles.ticket_container}>
+                {activeTab === 'exhibition' && <ExhibitionPanel />}
+                {activeTab === 'my' && <MyTicketPanel />}
+                {activeTab === 'visit' && <VisitTicketPanel />}
+            </View>
 
-      <Footer Section="Tickets" />
-    </SafeAreaView>
-  );
+            <Footer Section="Tickets" />
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     ticket_container: {
-      flex: 1,
+        flex: 1,
     },
 });

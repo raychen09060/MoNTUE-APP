@@ -92,7 +92,7 @@ function TicketRow({ label, price, count, setCount }) {
         >
           <Image
             source={require('../../images/plus_yellow.png')}
-            style={styles.icon}
+            style={{ height: 18, width: 18 }}
           />
         </Pressable>
       </View>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: 2.5,
+    marginVertical: 5,
     backgroundColor: '#ffffff',
     paddingLeft: 5,
   },
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
   counter: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContents: 'center',
     backgroundColor: '#ffffff',
   },
 
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
   totalRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    marginBottom: 10,
   },
 
   totalText: {
@@ -181,6 +182,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
+
     backgroundColor: '#F8E364',
     borderRadius: 24,
     paddingVertical: 1,
@@ -191,7 +193,7 @@ const styles = StyleSheet.create({
   },
 
   buttonText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '700',
     color: '#ffffff',
     letterSpacing: 2,

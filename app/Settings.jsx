@@ -11,7 +11,7 @@ export default function Settings() {
                 <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false }>
                     <View style={styles.settings_container}>
                         <View style={styles.settings_account}>
-                            <Text style={{ fontSize: 12, color: '#909090' }}>個 人 資 訊</Text>
+                            <Text style={{ fontSize: 15, fontWeight: '600' }}>個 人 資 訊</Text>
                             <View style={styles.settings_account_info}>
                                 <View style={styles.settings_account_info_img}>
                                     
@@ -25,23 +25,23 @@ export default function Settings() {
                             </View>
                         </View>
                         <View style={styles.settings_selections}>
-                            <Text style={{ fontSize: 12, color: '#909090' }}>其 他 資 訊</Text>
+                            <Text style={{ fontSize: 15, fontWeight: '600' }}>其 他 資 訊</Text>
                             <View style={styles.settings_selestions_container}>
                                 <Pressable style={styles.settings_selections_button}>
                                     <Image source={require('../images/Transport_icon_LM.png')} style={styles.settings_selections_button_icon} resizeMode="contain"/>
-                                    <Text style={{ fontSize: 20, marginLeft: 15 }}>交 通 資 訊</Text>
+                                    <Text style={{ fontSize: 18, marginLeft: 15 }}>交 通 資 訊</Text>
                                     <Image source={require('../images/Next_icon_LM.png')} style={{ width: 15, height: 15, position: 'absolute', right: 20 }} resizeMode="contain"/>
                                 </Pressable>
                                 <View style={{ width: '100%', height: 1, backgroundColor: '#000000' }}></View>
                                 <Pressable style={styles.settings_selections_button}>
                                     <Image source={require('../images/Contact_icon_LM.png')} style={styles.settings_selections_button_icon} resizeMode="contain"/>
-                                    <Text style={{ fontSize: 20, marginLeft: 15 }}>服 務 中 心</Text>
+                                    <Text style={{ fontSize: 18, marginLeft: 15 }}>服 務 中 心</Text>
                                     <Image source={require('../images/Next_icon_LM.png')} style={{ width: 15, height: 15, position: 'absolute', right: 20 }} resizeMode="contain"/>
                                 </Pressable>
                                 <View style={{ width: '100%', height: 1, backgroundColor: '#000000' }}></View>
                                 <View style={styles.settings_selections_button}>
                                     <Image source={require('../images/Display_mode_icon_LM.png')} style={styles.settings_selections_button_icon} resizeMode="contain"/>
-                                    <Text style={{ fontSize: 20, marginLeft: 15 }}>深 色 模 式</Text>
+                                    <Text style={{ fontSize: 18, marginLeft: 15 }}>深 色 模 式</Text>
                                     <Pressable style={{
                                         display: 'flex',
                                         justifyContent: 'center',
@@ -52,7 +52,7 @@ export default function Settings() {
                                         borderWidth: 1,
                                         borderColor: '#d9d9d9',
                                         borderRadius: 15,
-                                        backgroundColor: '#F8E364',
+                                        backgroundColor: '#d9d9d9',
                                         shadowColor: '#a0a0a0',
                                         shadowOffset: { width: 1, height: 1 },
                                         shadowOpacity: 1,
@@ -73,13 +73,13 @@ export default function Settings() {
                                 <View style={{ width: '100%', height: 1, backgroundColor: '#000000' }}></View>
                                 <Pressable style={styles.settings_selections_button}>
                                     <Image source={require('../images/Notification_icon_LM.png')} style={styles.settings_selections_button_icon} resizeMode="contain"/>
-                                    <Text style={{ fontSize: 20, marginLeft: 15 }}>通 知 設 定</Text>
+                                    <Text style={{ fontSize: 18, marginLeft: 15 }}>通 知 設 定</Text>
                                     <Image source={require('../images/Next_icon_LM.png')} style={{ width: 15, height: 15, position: 'absolute', right: 20 }} resizeMode="contain"/>
                                 </Pressable>
                                 <View style={{ width: '100%', height: 1, backgroundColor: '#000000' }}></View>
                                 <Pressable style={styles.settings_selections_button}>
                                     <Image source={require('../images/Info_icon_LM.png')} style={styles.settings_selections_button_icon} resizeMode="contain"/>
-                                    <Text style={{ fontSize: 20, marginLeft: 15 }}>關 於</Text>
+                                    <Text style={{ fontSize: 18, marginLeft: 15 }}>關 於</Text>
                                     <Image source={require('../images/Next_icon_LM.png')} style={{ width: 15, height: 15, position: 'absolute', right: 20 }} resizeMode="contain"/>
                                 </Pressable>
                             </View>
