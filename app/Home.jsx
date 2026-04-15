@@ -7,11 +7,8 @@ import { NEWS } from '../components/home/news_data';
 import { router } from 'expo-router';
 
 export default function News() {
-    // 1. Create the scrollY animated value
     const scrollY = useRef(new Animated.Value(0)).current;
 
-    // 2. Interpolate the scroll value to shrink the Carousel height
-    // As you scroll down 200px, the carousel shrinks from 300px to 100px
     const carouselHeight = scrollY.interpolate({
         inputRange: [0, 195],
         outputRange: [195, 0], 
@@ -79,7 +76,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '100%',
-        backgroundColor: '#ffffff', // Ensures scrolling items don't show behind the header
+        backgroundColor: '#ffffff',
         zIndex: 2,
     },
     home_header_button_container: {
@@ -101,14 +98,14 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         width: '100%',
-        backgroundColor: '#ffffff', // Prevents list items from bleeding through transparent edges
+        backgroundColor: '#ffffff',
         zIndex: 1, 
     },
     news_item_container: {
         width: 300,
         borderRadius: 5,
         backgroundColor: '#d0d0d0',
-        marginTop: 20,
+        marginTop: 10,
         paddingLeft: 10,
         justifyContent: 'center',
     },
