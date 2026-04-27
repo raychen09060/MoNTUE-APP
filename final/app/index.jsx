@@ -2,12 +2,13 @@ import { StyleSheet, View, Text, Image, ScrollView, Pressable } from 'react-nati
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-//testing
+
+
 export default function Intro() {
     return (
         <SafeAreaView style={styles.intro_container}>
             <Pressable style={styles.intro_logo_container} onPress={() => router.push('/Home')}>
-                <Image source={require('../images/logo_LM.png')} style={styles.intro_logo} resizeMode="contain"/>
+                <Image source={require('../images/logo_DM.png')} style={styles.intro_logo} resizeMode="contain"/>
             </Pressable>
         </SafeAreaView>
     );
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ffffff',
+        backgroundColor: '#000000',
     },
     intro_logo_container: {
         width: 350,
