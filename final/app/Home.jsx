@@ -1,43 +1,46 @@
 import { StyleSheet, View, Text, Image, ScrollView, Pressable, Dimensions } from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-
+import { ExhibitData } from '../components/ExhibitData';
+import { useLDM } from '../components/LDM';
 const {width, height} = Dimensions.get('window');
 
 export default function Home() {
+    const { colors } = useLDM();
+
     return (
-        <SafeAreaView style={styles.home_container}>
+        <SafeAreaView style={[styles.home_container, {backgroundColor: colors.bgc}]}>
             <View style={styles.home_poster_container}>
-                <Image source={require('../images/EP_remote-viewing_D.png')} style={styles.home_poster} resizeMode='contain'/>
+                <Image source={ExhibitData[0].poster_D} style={styles.home_poster} resizeMode='contain'/>
             </View>
             <View style={styles.home_button_container}>
-                <Shadow distance={10} startColor={'#ffffff55'} offset={[0, 0]}>
-                    <Pressable style={styles.home_button}
+                <Shadow distance={10} startColor={colors.glow} offset={[0, 0]}>
+                    <Pressable style={[styles.home_button, {backgroundColor: colors.bgc, borderColor: colors.glow_outline}]}
                     onPress={() => router.push('/Settings')}
                 >
-                        <Image source={require('../images/Settings_deactived_icon_DM.png')} style={styles.home_button_icon} resizeMode='contain'/>
+                        <Image source={colors.Settings_icon} style={styles.home_button_icon} resizeMode='contain'/>
                     </Pressable>
                 </Shadow>
                 
-                <Shadow distance={10} startColor={'#ffffff55'} offset={[0, 0]} style={{ borderRadius: width * 0.1 }}>
+                <Shadow distance={10} startColor={colors.glow} offset={[0, 0]} style={{ borderRadius: width * 0.1 }}>
                     <Pressable style={styles.home_to_ticket_container}
                     onPress={() => router.push('/Ticket')}
                 >
-                        <View style={styles.home_to_ticket_button}>
-                            <Image source={require('../images/Tickets_deactived_icon_DM.png')} style={styles.home_to_ticket_button_icon} resizeMode='contain'/>
-                            <Text style={{color: '#ffffff', fontSize: 18, fontWeight: '500'}}>
+                        <View style={[styles.home_to_ticket_button, {backgroundColor: colors.bgc, borderColor: colors.glow_outline}]}>
+                            <Image source={colors.Tickets_icon} style={styles.home_to_ticket_button_icon} resizeMode='contain'/>
+                            <Text style={{color: colors.text, fontSize: 18, fontWeight: '500'}}>
                                 門票
                             </Text>
                         </View>
                     </Pressable>
                 </Shadow>
-                <Shadow distance={10} startColor={'#ffffff55'} offset={[0, 0]}>
-                    <Pressable style={styles.home_button}
-                    onPress={() => router.push('/Settings')}
+                <Shadow distance={10} startColor={colors.glow} offset={[0, 0]}>
+                    <Pressable style={[styles.home_button, {backgroundColor: colors.bgc, borderColor: colors.glow_outline}]}
+                    onPress={() => router.push('/Guide')}
                 >
-                        <Image source={require('../images/Guide_deactived_icon_DM.png')} style={styles.home_button_icon} resizeMode='contain'/>
+                        <Image source={colors.Guide_icon} style={styles.home_button_icon} resizeMode='contain'/>
                     </Pressable>
                 </Shadow>
             </View>
@@ -50,7 +53,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#000000',
     },
     home_poster_container: {
         height: height * 0.7,
@@ -80,10 +82,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#000000',
         borderWidth: 1,
         borderRadius: width * 0.1,
-        borderColor: '#000000',
     },
     home_button_icon: {
         width: '60%',
@@ -97,10 +97,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: width * 0.05,
         alignItems: 'center',
         justifyContent: 'space-around',
-        backgroundColor: '#000000',
         borderWidth: 1,
         borderRadius: width * 0.1,
-        borderColor: '#000000',
     },
     home_to_ticket_button_icon: {
         width: width * 0.06,

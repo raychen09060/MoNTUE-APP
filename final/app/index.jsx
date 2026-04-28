@@ -1,14 +1,26 @@
-import { StyleSheet, View, Text, Image, ScrollView, Pressable } from 'react-native';
-import React from 'react';
+import { StyleSheet, View, Text, Image, ScrollView, Pressable, Appearance } from 'react-native';
+import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
+import { useLDM } from '../components/LDM';
 
 
 export default function Intro() {
+
+    const colors = useLDM((state) => state.colors);
+    const setTheme = useLDM((state) => state.setTheme);
+
+    useEffect(() => {
+        const subscription = Appearance.addChangeListener(({ colorScheme }) => {
+            setTheme(colorScheme);
+        });
+        return () => subscription.remove();
+    }, [setTheme]);
+
     return (
-        <SafeAreaView style={styles.intro_container}>
+        <SafeAreaView style={[styles.intro_container, {backgroundColor: colors.bgc,}]}>
             <Pressable style={styles.intro_logo_container} onPress={() => router.push('/Home')}>
-                <Image source={require('../images/logo_DM.png')} style={styles.intro_logo} resizeMode="contain"/>
+                <Image source={colors.Logo_img} style={styles.intro_logo} resizeMode="contain"/>
             </Pressable>
         </SafeAreaView>
     );
@@ -19,7 +31,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#000000',
     },
     intro_logo_container: {
         width: 350,

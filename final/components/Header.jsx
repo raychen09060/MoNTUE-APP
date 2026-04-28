@@ -3,16 +3,18 @@ import React from 'react';
 import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
+import { useLDM } from './LDM';
 
 const {width, height} = Dimensions.get('window');
 
-export default function Header() {
+export default function Header( {GoTo} ) {
+    const { colors } = useLDM();
     return (
-        <View style={styles.header_container}>
+        <View style={[styles.header_container, {backgroundColor: colors.bgc}]}>
             <Pressable
-                onPress={() => router.dismissTo('/Home')}
+                onPress={() => router.dismissTo(GoTo)}
                 style={styles.header_back_button}>
-                <Image source={require('../images/Back_icon_DM.png')} style={styles.header_back_buttton_icon} resizeMode="contain"/>
+                <Image source={colors.Back_icon} style={styles.header_back_buttton_icon} resizeMode="contain"/>
             </Pressable>
         </View>
     );
@@ -25,7 +27,6 @@ const styles = StyleSheet.create({
         height: height * 0.1,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#000000',
 /*         borderWidth: 1,
         borderColor: '#ff0000', */
     },

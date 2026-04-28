@@ -10,7 +10,7 @@ const {width, height} = Dimensions.get('window');
 export default function Intro() {
     return (
         <SafeAreaView style={styles.setting_container}>
-            <Header />
+            <Header GoTo="/Home"/>
         </SafeAreaView>
     );
 }
