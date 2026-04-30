@@ -44,12 +44,12 @@ export default function Settings() {
                     </View>
                     <View style={styles.setting_account_info_email_container}>
                         {UserData[0].id ? 
-                            <Text style={{color: colors.text, fontSize: 20, fontWeight: '500'}}>
+                            <Text style={{color: colors.text, fontSize: 16, fontWeight: '500'}}>
                                 {UserData[0].email}
                             </Text>
                         :
                             <Pressable style={styles.setting_account_login_button} onPress={() => router.push('/Settings/Login')}>
-                                <Text style={{color: '#ffffff', fontSize: 20, fontWeight: '500', letterSpacing: 2}}>
+                                <Text style={{color: '#ffffff', fontSize: 16, fontWeight: '500', letterSpacing: 2}}>
                                     登入/註冊
                                 </Text>
                             </Pressable>
@@ -167,29 +167,38 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     setting_account_info_container: {
-        width: height * 0.2,
+        width: '55%',
         height: height * 0.1,
         marginLeft: width * 0.05,
 /*         borderWidth: 1,
         borderColor: '#ffffff', */
     },
     setting_account_info_name_container: {
+        display: 'flex',
         width: '100%',
         height: '50%',
-        paddingLeft: 15,
+        justifyContent: 'center',
+/*         borderWidth: 1,
+        borderColor: '#ff0000', */
     },
     setting_account_info_email_container: {
+        display: 'flex',
         width: '100%',
         height: '50%',
+        justifyContent: 'center',
+/*         borderWidth: 1,
+        borderColor: '#ff0000', */
     },
     setting_account_login_button: {
         display: 'flex',
-        width: '80%',
+        width: '70%',
         height: '90%',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#F8E364',
         borderRadius: height * 0.05,
+/*         borderWidth: 1,
+        borderColor: '#ff0000', */
     },
     setting_other_container: {
         width: width * 0.8,

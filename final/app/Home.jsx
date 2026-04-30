@@ -2,16 +2,34 @@ import { StyleSheet, View, Text, Image, ScrollView, Pressable, Dimensions } from
 import React, {useState, useEffect} from 'react';
 import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Asset } from 'expo-asset';
+import * as FileSystem from 'expo-file-system';
 import { router } from 'expo-router';
 import { ExhibitData } from '../components/ExhibitData';
 import { useLDM } from '../components/LDM';
+
 const {width, height} = Dimensions.get('window');
 
 export default function Home() {
     const { colors } = useLDM();
+    const [bgColor, setBgColor] = useState(colors.bgc);
+
+    useEffect(() => {
+        async function loadBgColor() {
+            try {
+                const asset = Asset.fromModule(require('../assets/exhibit_bg_color.txt'));
+                await asset.downloadAsync();
+                const text = await FileSystem.readAsStringAsync(asset.localUri);
+                setBgColor(text.trim() || colors.bgc);
+            } catch (error) {
+                console.warn('Failed to load exhibit bg color:', error);
+            }
+        }
+        loadBgColor();
+    }, []);
 
     return (
-        <SafeAreaView style={[styles.home_container, {backgroundColor: colors.bgc}]}>
+        <SafeAreaView style={[styles.home_container, {backgroundColor: bgColor}]}>
             <View style={styles.home_poster_container}>
                 <Image source={ExhibitData[0].poster_D} style={styles.home_poster} resizeMode='contain'/>
             </View>
