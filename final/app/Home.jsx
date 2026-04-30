@@ -2,31 +2,46 @@ import { StyleSheet, View, Text, Image, ScrollView, Pressable, Dimensions } from
 import React, {useState, useEffect} from 'react';
 import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Asset } from 'expo-asset';
-import * as FileSystem from 'expo-file-system';
 import { router } from 'expo-router';
 import { ExhibitData } from '../components/ExhibitData';
-import { useLDM } from '../components/LDM';
+import { useLDM_Home } from '../components/LDM_Home';
 
 const {width, height} = Dimensions.get('window');
 
+function isDarkColor(hex) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+        return (r * 299 + g * 587 + b * 114) / 1000 < 128;
+    }
+
 export default function Home() {
-    const { colors } = useLDM();
-    const [bgColor, setBgColor] = useState(colors.bgc);
+    const { colors, remoteBgColor, setTheme, setRemoteBgColor } = useLDM_Home();
+    const [bgColor, setBgColor] = useState(remoteBgColor || colors.bgc);
 
     useEffect(() => {
-        async function loadBgColor() {
+        if (remoteBgColor) {
+            setBgColor(remoteBgColor);
+            return;
+        }
+
+        async function fetchBgColor() {
             try {
-                const asset = Asset.fromModule(require('../assets/exhibit_bg_color.txt'));
-                await asset.downloadAsync();
-                const text = await FileSystem.readAsStringAsync(asset.localUri);
-                setBgColor(text.trim() || colors.bgc);
+                const response = await fetch('https://montue-app.onrender.com/dominant-color');
+                const result = await response.json();
+                const color = result?.color;
+                if (color) {
+                    setRemoteBgColor(color);
+                    setTheme(isDarkColor(color) ? 'dark' : 'light');
+                    setBgColor(color);
+                }
             } catch (error) {
-                console.warn('Failed to load exhibit bg color:', error);
+                console.warn(error);
             }
         }
-        loadBgColor();
-    }, []);
+
+        fetchBgColor();
+    }, [remoteBgColor, setRemoteBgColor, setTheme]);
 
     return (
         <SafeAreaView style={[styles.home_container, {backgroundColor: bgColor}]}>
@@ -35,7 +50,7 @@ export default function Home() {
             </View>
             <View style={styles.home_button_container}>
                 <Shadow distance={10} startColor={colors.glow} offset={[0, 0]}>
-                    <Pressable style={[styles.home_button, {backgroundColor: colors.bgc, borderColor: colors.glow_outline}]}
+                    <Pressable style={[styles.home_button, {backgroundColor: bgColor, borderColor: colors.glow_outline}]}
                     onPress={() => router.push('/Settings')}
                 >
                         <Image source={colors.Settings_icon} style={styles.home_button_icon} resizeMode='contain'/>
@@ -46,7 +61,7 @@ export default function Home() {
                     <Pressable style={styles.home_to_ticket_container}
                     onPress={() => router.push('/Ticket')}
                 >
-                        <View style={[styles.home_to_ticket_button, {backgroundColor: colors.bgc, borderColor: colors.glow_outline}]}>
+                        <View style={[styles.home_to_ticket_button, {backgroundColor: bgColor, borderColor: colors.glow_outline}]}>
                             <Image source={colors.Tickets_icon} style={styles.home_to_ticket_button_icon} resizeMode='contain'/>
                             <Text style={{color: colors.text, fontSize: 18, fontWeight: '500'}}>
                                 門票
@@ -55,7 +70,7 @@ export default function Home() {
                     </Pressable>
                 </Shadow>
                 <Shadow distance={10} startColor={colors.glow} offset={[0, 0]}>
-                    <Pressable style={[styles.home_button, {backgroundColor: colors.bgc, borderColor: colors.glow_outline}]}
+                    <Pressable style={[styles.home_button, {backgroundColor: bgColor, borderColor: colors.glow_outline}]}
                     onPress={() => router.push('/Guide')}
                 >
                         <Image source={colors.Guide_icon} style={styles.home_button_icon} resizeMode='contain'/>
