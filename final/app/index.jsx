@@ -38,7 +38,6 @@ export default function Intro() {
                 setRemoteBgColor(color);
                 setHomeTheme(isDarkColor(color) ? 'dark' : 'light');
             }
-            console.log('remote color:', color);
             router.push('/Home');
         } catch (error) {
             console.warn('Failed fetching remote color:', error);

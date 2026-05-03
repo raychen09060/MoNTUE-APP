@@ -24,24 +24,7 @@ export default function Home() {
             setBgColor(remoteBgColor);
             return;
         }
-
-        async function fetchBgColor() {
-            try {
-                const response = await fetch('https://montue-app.onrender.com/dominant-color');
-                const result = await response.json();
-                const color = result?.color;
-                if (color) {
-                    setRemoteBgColor(color);
-                    setTheme(isDarkColor(color) ? 'dark' : 'light');
-                    setBgColor(color);
-                }
-            } catch (error) {
-                console.warn(error);
-            }
-        }
-
-        fetchBgColor();
-    }, [remoteBgColor, setRemoteBgColor, setTheme]);
+    });
 
     return (
         <SafeAreaView style={[styles.home_container, {backgroundColor: bgColor}]}>
