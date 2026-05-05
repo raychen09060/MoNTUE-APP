@@ -5,6 +5,7 @@ from pathlib import Path
 import re
 import numpy as np
 from sklearn.cluster import KMeans
+import colorsys
 
 app = Flask(__name__)
 
@@ -27,14 +28,21 @@ if not IMAGE_PATH.exists():
 
 def get_most_common_color(image_path: Path) -> str:
     img = Image.open(image_path).convert("RGB")
-    img = img.resize((100, 100))
+    img = img.resize((100, 100)) 
     pixels = np.array(img.getdata())
-    kmeans = KMeans(n_clusters=3, n_init='auto')
+    
+    kmeans = KMeans(n_clusters=5, n_init='auto')
     kmeans.fit(pixels)
+    
     colors = kmeans.cluster_centers_
-    labels = kmeans.labels_
-    counts = np.bincount(labels)
-    dominant_rgb = colors[np.argmax(counts)]
+    
+    def get_vibrancy(rgb):
+        r, g, b = rgb / 255.0
+        h, s, v = colorsys.rgb_to_hsv(r, g, b)
+        return s * v
+
+    vibrancies = [get_vibrancy(c) for c in colors]
+    dominant_rgb = colors[np.argmax(vibrancies)]
     r, g, b = dominant_rgb.astype(int)
     return "#{:02x}{:02x}{:02x}".format(r, g, b)
 
