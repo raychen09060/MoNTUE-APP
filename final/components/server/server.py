@@ -25,7 +25,8 @@ if not IMAGE_PATH.exists():
 
 def get_most_common_color(image_path: Path) -> str:
     img = Image.open(image_path).convert("RGB")
-    img = img.resize((10, 10), resample=Image.Resampling.LANCZOS)
+    img = img.quantize(colors=16).convert("RGB")
+    img = img.resize((8, 8), resample=Image.Resampling.BOX)
     counts = Counter(img.getdata())
     r, g, b = counts.most_common(1)[0][0]
     return "#{:02x}{:02x}{:02x}".format(r, g, b)

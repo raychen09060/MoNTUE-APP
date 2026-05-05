@@ -16,12 +16,12 @@ function isDarkColor(hex) {
     }
 
 export default function Home() {
-    const { colors, remoteBgColor, setTheme, setRemoteBgColor } = useLDM_Home();
-    const [bgColor, setBgColor] = useState(remoteBgColor || colors.bgc);
+    const { colors, homeBgColor, setTheme, setHomeBgColor } = useLDM_Home();
+    const [bgColor, setBgColor] = useState(homeBgColor || colors.bgc);
 
     useEffect(() => {
-        if (remoteBgColor) {
-            setBgColor(remoteBgColor);
+        if (homeBgColor) {
+            setBgColor(homeBgColor);
             return;
         }
     });
