@@ -28,11 +28,10 @@ if not IMAGE_PATH.exists():
 
 def get_most_common_color(image_path: Path) -> str:
     img = Image.open(image_path).convert("RGB")
-    img = img.resize((100, 100)) 
     
     pixels = np.array(img.getdata())
     
-    kmeans = KMeans(n_clusters=5, n_init='auto')
+    kmeans = KMeans(n_clusters=3, n_init='auto')
     kmeans.fit(pixels)
     
     colors = kmeans.cluster_centers_
