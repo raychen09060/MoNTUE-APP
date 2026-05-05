@@ -3,6 +3,8 @@ from flask import Flask, jsonify
 from PIL import Image
 from pathlib import Path
 import re
+import numpy as np
+from sklearn.cluster import KMeans
 
 app = Flask(__name__)
 
@@ -25,10 +27,15 @@ if not IMAGE_PATH.exists():
 
 def get_most_common_color(image_path: Path) -> str:
     img = Image.open(image_path).convert("RGB")
-    img = img.quantize(colors=16).convert("RGB")
-    img = img.resize((8, 8), resample=Image.Resampling.BOX)
-    counts = Counter(img.getdata())
-    r, g, b = counts.most_common(1)[0][0]
+    img = img.resize((100, 100))
+    pixels = np.array(img.getdata())
+    kmeans = KMeans(n_clusters=3, n_init='auto')
+    kmeans.fit(pixels)
+    colors = kmeans.cluster_centers_
+    labels = kmeans.labels_
+    counts = np.bincount(labels)
+    dominant_rgb = colors[np.argmax(counts)]
+    r, g, b = dominant_rgb.astype(int)
     return "#{:02x}{:02x}{:02x}".format(r, g, b)
 
 @app.route("/dominant-color")
