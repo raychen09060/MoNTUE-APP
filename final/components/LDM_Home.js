@@ -29,7 +29,7 @@ const modes = {
 export const useLDM_Home = create((set) =>({
     isDarkMode: systemMode === 'dark',
     colors: systemMode === 'dark' ? modes.dark : modes.light,
-    remoteBgColor: null,
+    homeBgColor: null,
 
     toggleTheme: () => set((state) => {
         const newMode = !state.isDarkMode;
@@ -44,5 +44,5 @@ export const useLDM_Home = create((set) =>({
         colors: mode === 'dark' ? modes.dark : modes.light,
     }),
 
-    setRemoteBgColor: (color) => set({ remoteBgColor: color }),
+    setHomeBgColor: (color) => set({ homeBgColor: color }),
 }))

@@ -16,40 +16,31 @@ export default function Intro() {
 
     const colors = useLDM((state) => state.colors);
     const setTheme = useLDM((state) => state.setTheme);
-    const setRemoteBgColor = useLDM_Home((state) => state.setRemoteBgColor);
+    const setHomeBgColor = useLDM_Home((state) => state.setHomeBgColor);
     const setHomeTheme = useLDM_Home((state) => state.setTheme);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const subscription = Appearance.addChangeListener(({ colorScheme }) => {
-            setTheme(colorScheme);
-        });
-        return () => subscription.remove();
-    }, [setTheme]);
-
-    async function handleLogoPress() {
-        if (loading) return;
-        setLoading(true);
-        try {
+        const init = async() => {
+            if (loading) return;
+            setLoading(true);
             const response = await fetch('https://montue-app.onrender.com/dominant-color');
             const result = await response.json();
-            const color = result?.color;
-            if (color) {
-                setRemoteBgColor(color);
-                setHomeTheme(isDarkColor(color) ? 'dark' : 'light');
+            if (result?.color) {
+                setHomeBgColor(result.color);
+                setHomeTheme(isDarkColor(result.color) ? 'dark' : 'light');
             }
-            router.push('/Home');
-        } catch (error) {
-            console.warn('Failed fetching remote color:', error);
-            router.push('/Home');
-        } finally {
-            setLoading(false);
-        }
-    }
+            console.log(result.color);
+        };
+        init();
+    }, []);
 
     return (
         <SafeAreaView style={[styles.intro_container, { backgroundColor: colors.bgc }]}> 
-            <Pressable style={styles.intro_logo_container} onPress={handleLogoPress}>
+            <Pressable 
+                style={styles.intro_logo_container} 
+                onPress={() => router.push('/Home')}
+            >
                 <Image source={colors.Logo_img} style={styles.intro_logo} resizeMode="contain" />
             </Pressable>
         </SafeAreaView>

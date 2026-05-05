@@ -19,10 +19,17 @@ export default function Settings() {
     return (
         <SafeAreaView style={[styles.setting_container, {backgroundColor: colors.bgc}]}>
             <Header GoTo="/Home"/>
-            <View style={styles.setting_tittle_container}>
+            <View style={styles.setting_title_container}>
                 <Text style={{color: colors.text, fontSize: 18, letterSpacing: 3}}>
                     個人資訊
                 </Text>
+                {UserData[0].id ? 
+                    <View style={styles.setting_title_icon_container}>
+                        <Image source={colors.Edit_icon} style={styles.setting_title_icon} resizeMode='contain' />
+                    </View>
+                :
+                    <></>
+                }
             </View>
             <View style={[styles.setting_account_container, {borderColor: colors.outline}]}>
                 <View style={styles.setting_account_img_container}>
@@ -44,7 +51,7 @@ export default function Settings() {
                     </View>
                     <View style={styles.setting_account_info_email_container}>
                         {UserData[0].id ? 
-                            <Text style={{color: colors.text, fontSize: 16, fontWeight: '500'}}>
+                            <Text style={{color: colors.text, fontSize: 10, fontWeight: '500'}}>
                                 {UserData[0].email}
                             </Text>
                         :
@@ -57,7 +64,7 @@ export default function Settings() {
                     </View>
                 </View>
             </View>
-            <View style={styles.setting_tittle_container}>
+            <View style={styles.setting_title_container}>
                 <Text style={{color: colors.text, fontSize: 18, letterSpacing: 3}}>
                     其他資訊
                 </Text>
@@ -140,11 +147,28 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
     },
-    setting_tittle_container: {
+    setting_title_container: {
         display: 'flex',
+        flexDirection: 'row',
         width: width * 0.8,
         height: height * 0.05,
         marginTop: 10,
+    },
+    setting_title_icon_container: {
+        display: 'flex',
+        width: 30,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+/*         borderWidth: 1,
+        borderColor: '#ff0000', */
+    },
+    setting_title_icon: {
+        display: 'flex',
+        width: 20,
+        height: 20,
+/*         borderWidth: 1,
+        borderColor: '#ff0000', */
     },
     setting_account_container: {
         display: 'flex',
@@ -171,7 +195,7 @@ const styles = StyleSheet.create({
         height: height * 0.1,
         marginLeft: width * 0.05,
 /*         borderWidth: 1,
-        borderColor: '#ffffff', */
+        borderColor: '#ff0000', */
     },
     setting_account_info_name_container: {
         display: 'flex',
@@ -185,7 +209,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         width: '100%',
         height: '50%',
-        justifyContent: 'center',
 /*         borderWidth: 1,
         borderColor: '#ff0000', */
     },

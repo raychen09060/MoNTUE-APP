@@ -4,62 +4,73 @@ import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { z } from 'zod';
+import { collection, query, where, getDocs, doc, setDoc } from 'firebase/firestore';
+import { db } from '../../../components/FirebaseConfig';
 import { UserData } from '../../../components/UserData';
 import { useLDM } from '../../../components/LDM';
 
 const {width, height} = Dimensions.get('window');
 
 const signupSchema = z.object({
-    email: z.string().email({message: '無效電子郵件地址'}),
-    password: z.string().min(6, {message: '密碼需要至少6位數'}),
-    confirmPassword: z.string()
-}).refine((data) => data.password === data.confirmPassword, {
-    message: '密碼不一致',
-    path: ['confirmPassword'],
+    name: z.string().min(1, {message: '請輸入姓名'}),
+    account: z.string().min(1, {message: '請輸入電子郵件地址'}).email({message: '請輸入有效的電子郵件地址'}),
+    password: z.string().min(1, {message: '請輸入密碼'}).min(6, {message: '密碼需至少 6 位數'}),
+    confirm: z.string()
 });
 
 export default function Create_account() {
     const { colors } = useLDM();
-
-    const [NewAccount, setNewAccount] = useState('');
-    const [NewPassword, setNewPassword] = useState('');
-    const [NewPassword2, setNewPassword2] = useState('');
+    const [Name, setName] = useState('');
+    const [Account, setAccount] = useState('');
+    const [Password, setPassword] = useState('');
+    const [PasswordConfirm, setPasswordConfirm] = useState('');
     const [errors, setErrors] = useState({});
 
-    const validateField = (fieldName, value) => {
-        const fieldSchema = signupSchema.shape[fieldName]; 
+    const checkField = async (fieldName, value) => {
+        const fieldSchema = signupSchema.shape[fieldName];
         const result = fieldSchema.safeParse(value);
 
-        if (!result.success) {
-            setErrors(prev => ({ ...prev, [fieldName]: result. error.flatten().formErrors }));
+        if(!result.success){
+            setErrors(prev => ({...prev, [fieldName]: result.error.flatten().formErrors }));
+            return;
         }
-        else {
-            setErrors(prev => {
-                const newErrors = { ...prev };
-                delete newErrors[fieldName];
-                return newErrors;
-            });
+
+        if(fieldName === 'account'){
+            try{
+                const usersRef = collection(db, "users");
+                const q = query(usersRef, where("email", "==", value));
+                const querySnapshot = await getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    setErrors(prev => ({ ...prev, account: ['電子郵件已註冊，請直接登入'] }));
+                    return;
+                }
+            }
+            catch(error){
+                console.error("Firebase error:", error);
+            }
         }
+
+        if(fieldName === 'confirm'){
+            if(value != Password){
+                setErrors(prev => ({...prev, confirm: ['與密碼不符']}));
+                return;
+            }
+        }
+
+        setErrors(prev => {
+            const newErrors = {...prev};
+            delete newErrors[fieldName];
+            return newErrors;
+        });
     };
 
-    const validateConfirmPassword = () => {
-        if (NewPassword2 !== NewPassword) {
-            setErrors(prev => ({ ...prev, confirmPassword: ["密碼不一致"] }));
-        }
-        else {
-            setErrors(prev => {
-                const newErrors = { ...prev };
-                delete newErrors.confirmPassword;
-                return newErrors;
-            });
-        }
-    };
-
-    const HandleCreate = () => {
+    const Register = async() => {
         const formData = {
-            email: NewAccount,
-            password: NewPassword,
-            confirmPassword: NewPassword2,
+            name: Name,
+            account: Account,
+            password: Password,
+            confirm: PasswordConfirm,
         };
 
         const result = signupSchema.safeParse(formData);
@@ -67,49 +78,109 @@ export default function Create_account() {
         if (!result.success) {
             const formattedErrors = result.error.flatten().fieldErrors;
             setErrors(formattedErrors);
+            return;
         }
-        else {
-            setErrors({});
-            console.log("Creating account for:", result.data.email);
-        }
-    };
 
+        if (Password !== PasswordConfirm) {
+            setErrors(prev => ({ ...prev, confirm: ['與密碼不符'] }));
+            return;
+        }
+
+        const usersRef = collection(db, "users");
+        const emailQuery = query(usersRef, where("email", "==", Account));
+        const emailSnapshot = await getDocs(emailQuery);
+        if (!emailSnapshot.empty) {
+            setErrors(prev => ({ ...prev, account: ['電子郵件已註冊，請直接登入'] }));
+            return;
+        }
+
+        const allUsersSnapshot = await getDocs(usersRef);
+        let maxId = -1;
+        allUsersSnapshot.forEach((doc) => {
+            const userData = doc.data();
+            const currentId = parseInt(userData.id);
+            if (!isNaN(currentId) && currentId > maxId) {
+                maxId = currentId;
+            }
+        });
+        const nextId = (maxId + 1).toString();
+        const newUserObject = {
+            id: nextId,
+            email: Account,
+            password: Password,
+            name: Name,
+            img: "",
+            ticket: [],
+            cart: [],
+        };
+
+        await setDoc(doc(db, "users", nextId), newUserObject);
+        UserData[0] = newUserObject;
+
+        router.dismissTo('/Settings');
+    };
 
     return(
         <View style={styles.create_account_container}>
             <TextInput
-                style={[styles.create_account_input, {marginBottom: errors.email ? 0 : 10, color: colors.text, borderColor: errors.email ? '#ff0000' : colors.outline}]}
-                placeholder="輸入電子郵件地址"
+                style={[styles.create_account_input, {color: colors.text, borderColor: errors.name? '#ff0000' : colors.outline, marginBottom: errors.name? 0 : 30}]}
+                placeholder="請輸入真實姓名"
                 placeholderTextColor="#a0a0a0"
-                value={NewAccount}
-                onChangeText={setNewAccount}
-                onBlur={() => validateField('email', NewAccount)}
+                value={Name}
+                onChangeText={setName}
+                onBlur={() => checkField('name', Name)}
             />
-            {errors.email && <Text style={{marginBottom: 10, fontSize: 15, color: 'red'}}>{errors.email[0]}</Text>}
+            {errors.name && (
+                <Text style={styles.errorText}>
+                    {errors.name[0]}
+                </Text>
+            )}
 
             <TextInput
-                style={[styles.create_account_input, {marginBottom: errors.password ? 0 : 10, color: colors.text, borderColor: errors.password ? '#ff0000' : colors.outline}]}
-                placeholder="輸入密碼"
+                style={[styles.create_account_input, {color: colors.text, borderColor: errors.account? '#ff0000' : colors.outline, marginBottom: errors.account? 0 : 30}]}
+                placeholder="請輸入電子郵件地址"
                 placeholderTextColor="#a0a0a0"
-                value={NewPassword}
-                onChangeText={setNewPassword}
-                onBlur={() => validateField('password', NewPassword)}
+                value={Account}
+                onChangeText={setAccount}
+                onBlur={() => checkField('account', Account)}
             />
-            {errors.password && <Text style={{marginBottom: 10, fontSize: 15, color: 'red'}}>{errors.password[0]}</Text>}
+            {errors.account && (
+                <Text style={styles.errorText}>
+                    {errors.account[0]}
+                </Text>
+            )}
 
             <TextInput
-                style={[styles.create_account_input, {marginBottom: errors.confirmPassword ? 0 : 10, color: colors.text, borderColor: errors.confirmPassword ? '#ff0000' : colors.outline}]}
-                placeholder="再次輸入密碼"
+                style={[styles.create_account_input, {color: colors.text, borderColor: errors.password? '#ff0000' : colors.outline, marginBottom: errors.password? 0 : 30}]}
+                placeholder="請輸入密碼"
                 placeholderTextColor="#a0a0a0"
-                value={NewPassword2}
-                onChangeText={setNewPassword2}
-                onBlur={validateConfirmPassword}
+                value={Password}
+                onChangeText={setPassword}
+                onBlur={() => checkField('password', Password)}
             />
-            {errors.confirmPassword && <Text style={{marginBottom: 10, fontSize: 15, color: 'red'}}>{errors.confirmPassword[0]}</Text>}
+            {errors.password && (
+                <Text style={styles.errorText}>
+                    {errors.password[0]}
+                </Text>
+            )}
+
+            <TextInput
+                style={[styles.create_account_input, {color: colors.text, borderColor: errors.confirm? '#ff0000' : colors.outline, marginBottom: errors.confirm? 0 : 30}]}
+                placeholder="請再次輸入密碼"
+                placeholderTextColor="#a0a0a0"
+                value={PasswordConfirm}
+                onChangeText={setPasswordConfirm}
+                onBlur={() => checkField('confirm', PasswordConfirm)}
+            />
+            {errors.confirm && (
+                <Text style={styles.errorText}>
+                    {errors.confirm[0]}
+                </Text>
+            )}
 
             <Pressable 
                 style={styles.create_account_button}
-                onPress={HandleCreate}
+                onPress={Register}
             >
                 <Text style={[styles.create_account_button_text, {color: colors.text}]}>
                     註冊
@@ -124,9 +195,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         width: '100%',
         height: '75%',
-        alignItems: 'center',
-        justifyContent: 'space-around',
-        paddingTop: '5%',
+        paddingTop: 20,
 /*         borderWidth: 1,
         borderColor: '#ff0000', */
     },
@@ -135,7 +204,7 @@ const styles = StyleSheet.create({
         height: height * 0.08,
         maxHeight: 50,
         borderWidth: 1,
-        marginBottom: 10,
+        alignSelf: 'center',
         paddingLeft: 10,
     },
     create_account_button: {
@@ -143,6 +212,7 @@ const styles = StyleSheet.create({
         width: '40%',
         height: height * 0.05,
         maxHeight: 50,
+        alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#f8e364',
@@ -152,7 +222,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '500',
     },
-    create_account_error: {
+    errorText: {
+        color: '#ff0000',
         fontSize: 14,
+        marginBottom: 5,
+        paddingLeft: 10,
     },
 });
