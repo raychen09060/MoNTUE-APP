@@ -24,9 +24,11 @@ export default function Settings() {
                     個人資訊
                 </Text>
                 {UserData[0].id ? 
-                    <View style={styles.setting_title_icon_container}>
+                    <Pressable
+                        onPress={() => router.push('/Settings/Userinfo')}
+                        style={styles.setting_title_icon_container}>
                         <Image source={colors.Edit_icon} style={styles.setting_title_icon} resizeMode='contain' />
-                    </View>
+                    </Pressable>
                 :
                     <></>
                 }
@@ -55,7 +57,13 @@ export default function Settings() {
                                 {UserData[0].email}
                             </Text>
                         :
-                            <Pressable style={styles.setting_account_login_button} onPress={() => router.push('/Settings/Login')}>
+                            <Pressable style={styles.setting_account_login_button} onPress={() => router.push({
+                                pathname: '/Settings/Login',
+                                params: {
+                                    back: '/Settings',
+                                    next: '/Settings'
+                                }
+                            })}>
                                 <Text style={{color: '#ffffff', fontSize: 16, fontWeight: '500', letterSpacing: 2}}>
                                     登入/註冊
                                 </Text>
@@ -165,8 +173,8 @@ const styles = StyleSheet.create({
     },
     setting_title_icon: {
         display: 'flex',
-        width: 20,
-        height: 20,
+        width: 15,
+        height: 15,
 /*         borderWidth: 1,
         borderColor: '#ff0000', */
     },
@@ -177,7 +185,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 30,
     },
     setting_account_img_container: {
         width: height * 0.1,
@@ -226,9 +234,8 @@ const styles = StyleSheet.create({
     setting_other_container: {
         width: width * 0.8,
         height: height * 0.4 + 4,
-        paddingRight: 15,
         borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 30,
     },
     setting_other_items_container: {
         display: 'flex',
@@ -237,6 +244,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: '100%',
         height: height * 0.08,
+        paddingRight: 15,
     },
     setting_other_items_icon: {
         width: width * 0.06,
@@ -247,7 +255,8 @@ const styles = StyleSheet.create({
         width: width * 0.3,
         height: 50,
         marginLeft: 15,
+        borderRadius: 30,
 /*         borderWidth: 1,
-        borderColor: '#ffffff' */
+        borderColor: '#ff0000', */
     },
 });

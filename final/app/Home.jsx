@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { ExhibitData } from '../components/ExhibitData';
 import { useLDM_Home } from '../components/LDM_Home';
+import { UserData } from '../components/UserData';
 
 const {width, height} = Dimensions.get('window');
 
@@ -42,7 +43,13 @@ export default function Home() {
                 
                 <Shadow distance={10} startColor={colors.glow} offset={[0, 0]} style={{ borderRadius: width * 0.1 }}>
                     <Pressable style={styles.home_to_ticket_container}
-                    onPress={() => router.push('/Ticket')}
+                    onPress={() => router.push({
+                        pathname: !UserData[0].id ? '/Settings/Login' : '/Ticket',
+                        params: {
+                            back: '/Home',
+                            next: '/Ticket'
+                        }
+                    })}
                 >
                         <View style={[styles.home_to_ticket_button, {backgroundColor: bgColor, borderColor: colors.glow_outline}]}>
                             <Image source={colors.Tickets_icon} style={styles.home_to_ticket_button_icon} resizeMode='contain'/>

@@ -3,9 +3,6 @@ from flask import Flask, jsonify
 from PIL import Image
 from pathlib import Path
 import re
-import numpy as np
-from sklearn.cluster import KMeans
-import colorsys
 
 app = Flask(__name__)
 
