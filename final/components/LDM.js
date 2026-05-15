@@ -10,6 +10,7 @@ const modes = {
         outline: '#000000',
         glow: '#90909055',
         glow_outline: '#ffffff',
+        input: '#a0a0a0',
         Logo_img: require('../images/logo_LM.png'),
         Settings_icon: require('../images/Settings_deactived_icon_LM.png'),
         Tickets_icon: require('../images/Tickets_deactived_icon_LM.png'),
@@ -23,7 +24,7 @@ const modes = {
         Contact_icon: require('../images/Contact_icon_LM.png'),
         Info_icon: require('../images/Info_icon_LM.png'),
         Next_icon: require('../images/Next_icon_LM.png'),
-
+        Scanner_icon: require('../images/Scanner_icon_LM.png'),
     },
     dark: {
         bgc: '#000000',
@@ -31,6 +32,7 @@ const modes = {
         outline: '#ffffff',
         glow: '#ffffff55',
         glow_outline: '#000000',
+        input: '#a0a0a0',
         Logo_img: require('../images/logo_DM.png'),
         Settings_icon: require('../images/Settings_deactived_icon_DM.png'),
         Tickets_icon: require('../images/Tickets_deactived_icon_DM.png'),
@@ -44,6 +46,7 @@ const modes = {
         Contact_icon: require('../images/Contact_icon_DM.png'),
         Info_icon: require('../images/Info_icon_DM.png'),
         Next_icon: require('../images/Next_icon_DM.png'),
+        Scanner_icon: require('../images/Scanner_icon_DM.png'),
     }
 };
 

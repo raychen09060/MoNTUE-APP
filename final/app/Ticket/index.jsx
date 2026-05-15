@@ -14,7 +14,6 @@ export default function Ticket() {
     return (
         <SafeAreaView style={[styles.setting_container, {backgroundColor: colors.bgc}]}>
             <Header GoTo="/Home"/>
-
         </SafeAreaView>
     );
 }
