@@ -21,8 +21,14 @@ export default function Purchase() {
                     </ScrollView>
                 </View>
             </Shadow>
-            
+
+            <Pressable style={{marginTop: '5%'}} onPress={() => router.push('/Ticket/Purchase/Select')}>
+                <Text style={[styles.tab_text, {color: colors.text}]}>
+                    立即購票
+                </Text>
+            </Pressable>
         </View>
+        
     );
 }
 
