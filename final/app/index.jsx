@@ -3,29 +3,35 @@ import React, { useEffect, useState, useRef } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { useLDM } from '../components/LDM';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../components/FirebaseConfig';
+import { ExhibitData } from '../components/ExhibitData';
 
 const { width, height } = Dimensions.get('window');
 
 export default function Intro() {
     const colors = useLDM((state) => state.colors);
-    const setTheme = useLDM((state) => state.setTheme);
-    const [loading, setLoading] = useState(false);
+    const [isDataReady, setIsDataReady] = useState(false);
+    const [hasAnimatedTo90, setHasAnimatedTo90] = useState(false);
+    const [fetchError, setFetchError] = useState(null);
+    const [exhibitionData, setExhibitionData] = useState([]);
     const progress = useRef(new Animated.Value(0)).current;
 
-    useEffect(() => {
-        const startFakeLoading = () => {
-            Animated.timing(progress, {
-                toValue: 1,
-                duration: 2000 + Math.random() * 3000,
-                useNativeDriver: false,
-            }).start(() => {
-                setTimeout(() => router.push('/Home'), 200);
-            });
-        };
+    const fetchExhibitionData = async () => {
+        const exhibitionRef = collection(db, 'exdata');
+        const snapshot = await getDocs(exhibitionRef);
+        return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    };
 
-        startFakeLoading();
-        
-    }, []);
+    useEffect(() => {
+        Animated.timing(progress, {
+            toValue: 1,
+            duration: 2000,
+            useNativeDriver: false,
+        }).start(() => {
+            router.push('/Home');
+        });
+    })
 
     const barWidth = progress.interpolate({
         inputRange: [0, 1],

@@ -12,7 +12,7 @@ export default function Header( {GoTo} ) {
     return (
         <View style={[styles.header_container, {backgroundColor: colors.bgc}]}>
             <Pressable
-                onPress={() => router.dismissTo(GoTo)}
+                onPress={() => router.replace(GoTo)}
                 style={styles.header_back_button}>
                 <Image source={colors.Back_icon} style={styles.header_back_buttton_icon} resizeMode="contain"/>
             </Pressable>

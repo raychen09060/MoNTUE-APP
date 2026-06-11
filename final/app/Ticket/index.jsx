@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Image, ScrollView, Pressable, Dimensions, Anima
 import React, { useState, useEffect, useRef } from 'react';
 import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import Header from '../../components/Header';
 import { useLDM } from '../../components/LDM';
 import Purchase from '../Ticket/Purchase';
@@ -15,8 +15,11 @@ const tablength = width * 0.6 / 2;
 
 export default function Ticket() {
     const { colors } = useLDM();
-    const [activeTab, setActiveTab] = useState(0);
-    
+    const params = useLocalSearchParams();
+    const initialTab = Number(params.activeTab);
+    const initialSubTab = Number(params.activesubTab);
+    const [activeTab, setActiveTab] = useState(Number.isInteger(initialTab) ? initialTab : 0);
+    const [activeSubTab, setActiveSubTab] = useState(Number.isInteger(initialSubTab) ? initialSubTab : 0);
 
     const translateX = useRef(new Animated.Value(activeTab * tablength)).current;
 
@@ -30,7 +33,7 @@ export default function Ticket() {
 
     return (
         <SafeAreaView style={[styles.setting_container, { backgroundColor: colors.bgc }]}> 
-            <Header GoTo="/Home" />
+            <Header GoTo={(activeTab === 0 && activeSubTab === 1) ? '/Ticket?activeTab=0&activesubTab=0' : '/Home'} />
             <View style={styles.tab_container}>
                 <View style={styles.tab_button_container}>
                     <Pressable style={styles.tab_button} onPress={() => setActiveTab(0)}>
@@ -43,7 +46,7 @@ export default function Ticket() {
                                 pathname: '/Settings/Login',
                                 params: {
                                     back: '/Ticket',
-                                    next: '/Ticket'
+                                    next: '/Ticket?activeTab=1'
                                 }
                             })}>
                         <Text style={[styles.tab_text, {color: activeTab ? '#F8E364' : colors.text}]}>
@@ -61,7 +64,7 @@ export default function Ticket() {
 
             <View style={styles.ticket_content}>
                 {!activeTab ? 
-                    <Purchase/> 
+                    <Purchase initialSubTab={activeSubTab} onSubTabChange={setActiveSubTab} /> 
                 : 
                     <Folder/>
                 }
