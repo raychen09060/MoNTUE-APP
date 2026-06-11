@@ -122,7 +122,7 @@ export default function Settings() {
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <Image source={colors.Contact_icon} style={styles.setting_other_items_icon} resizeMode="contain"/>
                         <Text style={{color: colors.text, fontSize: 24, letterSpacing: 3}}>
-                            聯絡我們
+                            服務中心
                         </Text>
                     </View>
                     <Image source={colors.Next_icon} style={styles.setting_other_items_icon} resizeMode="contain"/>

@@ -15,6 +15,12 @@ export default function Ticket() {
         <SafeAreaView style={[styles.setting_container, {backgroundColor: colors.bgc}]}>
             <Header GoTo="/Home"/>
 
+            <TicketTab activeTab={activeTab} setActiveTab={setActiveTab} />
+
+            <View style={styles.ticket_container}>
+                {activeTab === 'exhibition' && <ExhibitionPanel />}
+                {activeTab === 'my' && <MyTicketPanel />}
+            </View>
         </SafeAreaView>
     );
 }
