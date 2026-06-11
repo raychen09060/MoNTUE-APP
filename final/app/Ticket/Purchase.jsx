@@ -21,6 +21,7 @@ export default function Purchase() {
                     </ScrollView>
                 </View>
             </Shadow>
+            
         </View>
     );
 }
@@ -31,8 +32,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         alignItems: 'center',
-/*         borderWidth: 1,
-        borderColor: '#ff0000' */
+        borderWidth: 1,
+        borderColor: '#ff0000'
     },
     purchase_card: {
         display: 'flex',

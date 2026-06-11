@@ -105,7 +105,10 @@ export default function Settings() {
                     <Image source={colors.Next_icon} style={styles.setting_other_items_icon} resizeMode="contain"/>
                 </View>
                 <View style={{width: '100%', height: 1, backgroundColor: colors.outline}}/>
-                <View style={styles.setting_other_items_container}>
+                <Pressable 
+                    style={styles.setting_other_items_container}
+                    onPress={() => router.push('/Settings/chatbot')}
+                >
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <Image source={colors.Contact_icon} style={styles.setting_other_items_icon} resizeMode="contain"/>
                         <Text style={{color: colors.text, fontSize: 24, letterSpacing: 3}}>
@@ -113,7 +116,7 @@ export default function Settings() {
                         </Text>
                     </View>
                     <Image source={colors.Next_icon} style={styles.setting_other_items_icon} resizeMode="contain"/>
-                </View>
+                </Pressable>
                 <View style={{width: '100%', height: 1, backgroundColor: colors.outline}}/>
                 <View style={styles.setting_other_items_container}>
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -128,6 +131,13 @@ export default function Settings() {
             {UserData[0].id ? 
                 <Pressable
                     style={styles.setting_logout_button}
+                    onPress = {() => {
+                        UserData[0].id = '';
+                        UserData[0].tel = '';
+                        UserData[0].ticket = [];
+                        UserData[0].cart = {'A': 0, 'B': 0, 'C': 0};
+                        router.push('/Settings');
+                    }}
                 >
                     <Text style={{fontSize: 20, color: '#ffaaaa', fontWeight: '600'}}>
                         登出

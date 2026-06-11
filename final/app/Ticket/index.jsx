@@ -35,7 +35,7 @@ export default function Ticket() {
                 <View style={styles.tab_button_container}>
                     <Pressable style={styles.tab_button} onPress={() => setActiveTab(0)}>
                         <Text style={[styles.tab_text, {color: activeTab ? colors.text : '#F8E364'}]}>
-                            展覽資訊
+                            購買門票
                         </Text>
                     </Pressable>
 
@@ -57,11 +57,13 @@ export default function Ticket() {
                     <Animated.View style={[styles.tab_line, {transform: [{translateX}]}]} />
                 </View>
             </View>
+
+
             <View style={styles.ticket_content}>
-                {activeTab ? 
-                    <Folder/> 
+                {!activeTab ? 
+                    <Purchase/> 
                 : 
-                    <Purchase/>
+                    <Folder/>
                 }
             </View>
             

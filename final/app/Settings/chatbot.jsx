@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image, ScrollView, Pressable, Dimensions, Appearance, Switch, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, Pressable, Dimensions, Appearance, Switch, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, Keyboard, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { Shadow } from 'react-native-shadow-2';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -6,31 +6,31 @@ import { router } from 'expo-router';
 import Header from '../../components/Header';
 import { UserData } from '../../components/UserData';
 import { useLDM } from '../../components/LDM';
-import Sign_in from '../Settings/Login/Sign_in';
-import Create_account from '../Settings/Login/Create_account';
+import axios from 'axios';
+
 
 export default function AssistantScreen() {
 
-  const [chatMode, setChatMode] = useState(null);
-  const [messages, setMessages] = useState([
+    const [chatMode, setChatMode] = useState(null);
+    const [messages, setMessages] = useState([
 
     {
-      role: "assistant",
-      content: "您好，請問本獅可以如何協助您？",
+        role: "assistant",
+        content: "您好，請問本獅可以如何協助您？",
     },
 
-  ]);
+    ]);
 
-  const [inputText, setInputText] = useState("");
-  const [loading, setLoading] = useState(false);
-  const scrollViewRef = useRef(null);
+    const [inputText, setInputText] = useState("");
+    const [loading, setLoading] = useState(false);
+    const scrollViewRef = useRef(null);
 
-  const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
-  const GROQ_API_KEY = process.env.EXPO_PUBLIC_GROQ_API_KEY;
+    const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+    const GROQ_API_KEY = process.env.EXPO_PUBLIC_GROQ_API_KEY;
 
-  const startTicketMode = () => {
+    const startTicketMode = () => {
 
-    setChatMode("ticket");
+        setChatMode("ticket");
 
     setMessages([
 
