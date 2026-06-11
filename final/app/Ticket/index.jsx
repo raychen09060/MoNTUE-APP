@@ -57,11 +57,13 @@ export default function Ticket() {
                     <Animated.View style={[styles.tab_line, {transform: [{translateX}]}]} />
                 </View>
             </View>
+
+
             <View style={styles.ticket_content}>
-                {activeTab ? 
-                    <Folder/> 
+                {!activeTab ? 
+                    <Purchase/> 
                 : 
-                    <Purchase/>
+                    <Folder/>
                 }
             </View>
             
