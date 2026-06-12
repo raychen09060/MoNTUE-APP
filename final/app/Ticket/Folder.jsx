@@ -27,7 +27,14 @@ export default function Folder() {
                         renderItem={({ item }) => (
                             <Pressable 
                                 style={[styles.ticket_container, {borderColor: colors.outline}]}
-                                onPress = {() => router.push('/Ticket/TicketDetail')}
+                                onPress = {() => router.push({
+                                    pathname: '/Ticket/TicketDetail',
+                                    params:{
+                                        ticketnum: item,
+                                        back: '/Ticket',
+                                        next: '/Ticket'
+                                    }
+                                })}
                             >
                                 <View style={styles.poster_container}>
                                     <Image source={ ExhibitData[0].poster_D } style={{ width: '100%', height: '100%', borderTopLeftRadius: 20, borderBottomLeftRadius: 20 }} resizeMode="contain"/>
